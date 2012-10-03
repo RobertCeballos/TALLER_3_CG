@@ -230,8 +230,18 @@ public class Poligono {
 
     public static void main(String[] args) {
         // TODO code application logic here
+        Vector v = new Vector();
         
-         
+        v.add("carro");
+        v.add("perro");
+        v.add("casa");
+        
+        System.out.println(v.get(0));
+        System.out.println(v.get(1));
+        System.out.println();
+        v.remove(0);
+        System.out.println(v.get(0));
+        System.out.println(v.get(1));
         
         new Poligono();
 
