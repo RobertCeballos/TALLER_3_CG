@@ -27,7 +27,9 @@ public class PoligonoFinal {
     Vector vIniciales = new Vector();
     Vector vAux = new Vector();
     Vector vPuntos = new Vector();
+    Vector vPuntosFinales = new Vector();
     Vector v3 = new Vector();
+    Vector v2 = new Vector();
 
     public PoligonoFinal() {
 
@@ -88,6 +90,8 @@ public class PoligonoFinal {
         vPuntos.add(obtieneVectorFinal(vIniciales, idx));
         Vector text = (Vector) vPuntos.get(0);
         v3 = text;
+        v2 = obtenerVectorPuntos(v3, idx);
+        vPuntosFinales.add(v2);
 
 
         for (int i = 0; i < text.size(); i++) {
@@ -108,6 +112,10 @@ public class PoligonoFinal {
 
                 v3 = ordenarVector(v3);
                 vPuntos.add(v3);
+                v2 = obtenerVectorPuntos(v3, idx);
+                vPuntosFinales.add(v2);
+                
+                
                 Vector vPuntosFinales = (Vector) vPuntos.get(i);
 
                 for (int r = 0; r < vPuntosFinales.size(); r++) {
@@ -128,6 +136,8 @@ public class PoligonoFinal {
             v3 = ordenarVector(v3);
 
             vPuntos.add(v3);
+            v2 = obtenerVectorPuntos(v3, idx);
+            vPuntosFinales.add(v2);
 
             Vector vPuntosFinales = (Vector) vPuntos.get(i);
 
@@ -411,6 +421,33 @@ public class PoligonoFinal {
         
         return retorno;               
     }
+    
+    Vector obtenerVectorPuntos(Vector vectorP, int y){
+        
+        Vector vectorOut = new Vector();
+        double[] out = new double[3];
+        Point punto1 = new Point();
+        
+        for (int i = 0; i < vectorP.size(); i++) {
+            out = (double[]) vectorP.get(i);
+            punto1.x = (int) Math.rint(out[1]);
+            punto1.y = y;
+            
+            vectorOut.add(punto1);
+            System.out.println("punto.x: "+punto1.x);
+        }
+        
+        return vectorOut;
+    }
 
     
 }
+
+
+
+
+
+
+
+
+
