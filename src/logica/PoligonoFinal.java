@@ -109,7 +109,7 @@ public class PoligonoFinal {
                 acep = false;
                 continue;
             }
-if (v3.size() > 2) {
+                if (v3.size() > 2) {
                     //v3 = ordenarVector(v3);
                 }
 
