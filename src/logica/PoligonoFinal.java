@@ -95,7 +95,7 @@ public class PoligonoFinal {
                 v3 = unirVectores(v3, vec);
                 v3 = EliminaFinales(v3, idx);
 
-
+                v3 = ordenarVector(v3);
                 vPuntos.add(v3);
                 Vector vPuntosFinales = (Vector) vPuntos.get(i);
 
@@ -109,11 +109,12 @@ public class PoligonoFinal {
                 acep = false;
                 continue;
             }
-                v3 = ordenarVector(v3);
+                
             
 
             v3 = (incrementoAutomatico(v3));
             v3 = EliminaFinales(v3, idx);
+            v3 = ordenarVector(v3);
 
             vPuntos.add(v3);
 
