@@ -95,7 +95,7 @@ public class PoligonoFinal {
                 v3 = unirVectores(v3, vec);
                 v3 = EliminaFinales(v3, idx);
 
-                
+
                 vPuntos.add(v3);
                 Vector vPuntosFinales = (Vector) vPuntos.get(i);
 
@@ -109,9 +109,8 @@ public class PoligonoFinal {
                 acep = false;
                 continue;
             }
-if (v3.size() > 2) {
-                    //v3 = ordenarVector(v3);
-                }
+                v3 = ordenarVector(v3);
+            
 
             v3 = (incrementoAutomatico(v3));
             v3 = EliminaFinales(v3, idx);
@@ -308,14 +307,14 @@ if (v3.size() > 2) {
 
     private Vector ordenarVector(Vector v3) {
 
-        double[] valorX = ordenarX(v3);
+        double[][] valorX = ordenarX(v3);
         Vector out1 = new Vector();
         for (int i = 0; i < valorX.length; i++) {
-            double xaux = valorX[i];
-            
+            double xAux = valorX[i][0];
+            double mAux = valorX[i][1];
             for (int j = 0; j < v3.size(); j++) {
                 double[] get = (double[]) v3.get(j);
-                if(get[1] == xaux){
+                if (get[1] == xAux && get[2]==mAux) {
                     out1.add(v3.get(j));
                     break;
                 }
@@ -326,28 +325,79 @@ if (v3.size() > 2) {
         return out1;
     }
 
-    double[] ordenarX(Vector vecX) {
-        double[] valorX = new double[vecX.size()];
+    double[][] ordenarX(Vector vecX) {
+        double[][] valorX = new double[vecX.size()][2];
         double[] out = new double[3];
 
         for (int i = 0; i < vecX.size(); i++) {
             out = (double[]) vecX.get(i);
-            valorX[i] = out[1];
+            valorX[i][0] = out[1];
+            valorX[i][1] = out[2];            
         }
         valorX = burbuja(valorX);
         return valorX;
     }
-
-    public double[] burbuja(double[] a) {
+    
+    public double[][] burbuja(double[][] a) {        
         for (int i = a.length - 1; i > 0; i--) {
             for (int j = 0; j < i; j++) {
-                if (a[ j] > a[ j + 1]) {
-                    double temp = a[ j];
-                    a[ j] = a[ j + 1];
-                    a[ j + 1] = temp;
+                if (a[j][0] > a[j+1][0]) {
+                    double temp = a[j][0];
+                    a[j][0] = a[j+1][0];
+                    a[j+1][0] = temp;
+                    double temp2 = a[j][1];
+                    a[j][1] = a[j+1][1];
+                    a[j+1][1] = temp2;
+                   
                 }
             }
         }
+        
+        for (int i = 0; i < a.length; i++) {
+            for (int j = 0; j < a[0].length; j++) {
+                double ds = a[i][j];
+                System.out.println(ds);
+            }
+            
+        }
+        
         return a;
     }
+
+    /// Este metodo recibe el vector  de vectores con los Points resultantes 
+    public ArrayList<Point> vectorTodosPuntos(Vector v) {
+        ArrayList<Point> a = new ArrayList<Point>();
+        
+        for (int i = 0; i < v.size(); i++) {
+            
+            Vector getVector = (Vector) v.get(i);
+            
+            for (int j = 0; j < getVector.size(); j=j+2) {
+                Point punto1 = (Point) getVector.elementAt(j);
+                Point punto2 = (Point) getVector.elementAt(j+1);
+                ArrayList<Point> hallarPuntosEntreDosPuntos = hallarPuntosEntreDosPuntos(punto1, punto2);
+                for(int k =0;k<hallarPuntosEntreDosPuntos.size();k++){
+                    a.add(hallarPuntosEntreDosPuntos.get(k));
+                }
+            }
+            
+        }
+
+        return a;
+    }
+    
+    private ArrayList<Point> hallarPuntosEntreDosPuntos(Point p1, Point p2){
+        ArrayList<Point> retorno = new ArrayList<Point>();
+        if(p1.x > p2.x){
+            Point pAux = p1;
+            p1 = p2;
+            p2 = pAux;
+        }
+        for(int i = p1.x;i <= p2.x;i++){
+            retorno.add(new Point((p1.x)+i,p1.y));
+        }
+        
+        return retorno;               
+    }
+    
 }
