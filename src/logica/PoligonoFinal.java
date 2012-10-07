@@ -44,6 +44,17 @@ public class PoligonoFinal {
         vPuntosFinales();
 
     }
+    
+    public ArrayList<Point> algoritmoPoligono(Point[] puntos){
+        arregloInicial(puntos);
+        scanLine(puntos);
+        vPuntosFinales();
+        /// ************************************ Ingresar el vector de vector con los Points 
+        //++ArrayList<Point> vectorTodosPuntos = vectorTodosPuntos(VectorVectorPoints);
+        //++return vectorTodosPuntos;
+        return null;
+    }
+    
 
     //Crea el Vector auxiliar
     void scanLine(Point[] puntos) {
@@ -400,5 +411,6 @@ public class PoligonoFinal {
         
         return retorno;               
     }
+
     
 }
